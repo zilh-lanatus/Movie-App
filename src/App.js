@@ -1,4 +1,3 @@
-import './App.css';
 import Main from './Components/Main';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
