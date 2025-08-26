@@ -1,11 +1,18 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { moviesObject } from './Home'
 
 export const MoviesContext=createContext()
 
 export default function MoviesProvider({children}) {
 
-    const [movies,setMovies]=useState(moviesObject)
+    const [movies,setMovies]=useState(()=>{
+      const storedMovies=localStorage.getItem("movies")
+      return storedMovies ? JSON.parse(storedMovies) : moviesObject
+    })
+
+    useEffect(()=>{
+      localStorage.setItem("movies",JSON.stringify(movies))
+    },[movies])
 
   return (
     <>

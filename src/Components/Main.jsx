@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { ThemeProvider, createTheme, CssBaseline, AppBar, Button, Toolbar, Typography, Box, IconButton } from "@mui/material";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Home from "./Home";
@@ -15,7 +15,14 @@ function Main() {
 
     const [searchMovie,setSearchMovie]=useState('')
 
-    const [mode,setMode]=useState('light')
+    const [mode,setMode]=useState(()=>{
+      const storedMode=localStorage.getItem("themeMode")
+      return storedMode ? storedMode : 'light'
+    })
+
+    useEffect(()=>{
+      localStorage.setItem("themeMode",mode)
+    },[mode]);
 
     const theme = createTheme({
       palette: { mode: mode },

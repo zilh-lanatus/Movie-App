@@ -9,7 +9,7 @@ const columns = [
 
   { field: 'id',
     headerName: 'ID',
-    width: 50
+    width: 70
   },
   {
     field: 'title',
