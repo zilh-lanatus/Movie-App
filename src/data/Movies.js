@@ -82,7 +82,7 @@ export const moviesObject = [
     cast: ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen"],
     director: "Ridley Scott",
     trailer: "https://www.youtube.com/watch?v=owK1qxDselE"
-  },
+  }, 
   {
     id: 8,
     title: "The Shawshank Redemption",
