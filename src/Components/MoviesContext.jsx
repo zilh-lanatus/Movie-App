@@ -1,9 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { moviesObject } from './Home'
+import { moviesObject } from '../data/Movies' 
 
 export const MoviesContext=createContext()
 
-export default function MoviesProvider({children}) {
+export function MoviesProvider({children}) {
 
     const [movies,setMovies]=useState(()=>{
       const storedMovies=localStorage.getItem("movies")

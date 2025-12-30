@@ -61,7 +61,7 @@ const columns = [
 
 
 
-function Edit() {
+export function Edit() {
 
   const {movies,setMovies}=useContext(MoviesContext)
 
@@ -98,5 +98,3 @@ function Edit() {
     </>
   )
 }
-
-export default Edit

@@ -1,17 +1,17 @@
-import React,{useEffect, useState} from "react";
-import { ThemeProvider, createTheme, CssBaseline, AppBar, Button, Toolbar, Typography, Box, IconButton } from "@mui/material";
+import React,{useEffect, useMemo, useState} from "react";
+import { ThemeProvider, createTheme, CssBaseline, AppBar, Button, Toolbar, Typography, Box, IconButton, TextField } from "@mui/material";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import Home from "./Home";
-import Edit from "./Edit";
+import {Home} from "./Home";
+import {Edit} from "./Edit";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import MoviesProvider from "./MoviesContext";
+import {MoviesProvider} from "./MoviesContext";
 import { DarkMode, LightMode } from "@mui/icons-material";
 
 
-function Main() {
+export function Main() {
 
     const [searchMovie,setSearchMovie]=useState('')
 
@@ -24,9 +24,13 @@ function Main() {
       localStorage.setItem("themeMode",mode)
     },[mode]);
 
-    const theme = createTheme({
+    const theme = useMemo(() => {
+    console.log("Theme created for:", mode); // debugging
+    return createTheme({
       palette: { mode: mode },
     });
+  }, [mode]);
+
 
 
   const toggleTheme=()=>{
@@ -45,21 +49,18 @@ function Main() {
             MovieApp
           </Typography>
 
-          <Box sx={{ display: "flex", alignItems: "center",width:'40%' }}>
-            <input
-              type="text"
+          {/* <Box sx={{ display: "flex", alignItems: "center",width:'40%',marginLeft:'10rem' }}> */}
+            <TextField
+             variant="outlined"
+             size="small"
               placeholder="Search Movies..."
-              style={{
-                padding: "6px",
-                borderRadius: "4px",
-                border: "none",
-                height: "2.5rem",
-                width: "85%",
-                outline: "none",
-                fontSize:'1rem',
-                marginLeft:'60px',
-                fontFamily:'Roboto'
+              sx={{
+                bgcolor: "background.paper", // uses theme paper color (white in light mode, dark gray in dark mode)
+                borderRadius: 1,
+                width: "20rem",
+                input: { color: "text.primary" }, // text color adapts to theme
               }}
+            
               value={searchMovie}
               onChange={(e)=>setSearchMovie(e.target.value)}
             />
@@ -69,7 +70,7 @@ function Main() {
             >
               Search
             </Button> */}
-          </Box>
+          {/* </Box> */}
 
           <Box sx={{ display: "flex", gap: 2 }}>
             <Button component={Link} to="/" sx={{ color: "white",fontFamily:'cursive' }}>
@@ -97,4 +98,4 @@ function Main() {
   );
 }
 
-export default Main;
+
